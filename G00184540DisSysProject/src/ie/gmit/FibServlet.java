@@ -14,40 +14,47 @@ public class FibServlet extends HttpServlet {
 	  public void doGet(HttpServletRequest request, 
 	      HttpServletResponse response) throws ServletException, IOException 
 	  {
-	    // reading the user input
-		  int max = Integer.valueOf(request.getParameter("max"));
+		  String fibCall= "null";//Variable that will carry the fibonacci sequence to be outputted.
+		  String errorMessage= "You need to go back and input a number within the range 1-100";
+		   
+	      int max = Integer.valueOf(request.getParameter("max"));//Integer typed in by user.
 		  int jobNumber = FibService.add(max);
 		  
-		  FibClient fib = new FibClient();
-		  try {
-			fib.rmiCall(max);
-			
-		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		  
+		  FibClient fib = new FibClient();//Calling new instance of the fib client class to assign a job number to the request
 		  
-	   String result= "null"; 
+		  try 
+		  {
+			  fib.rmiCall(max);
+			  fibCall = fib.rmiCall(max);
+		  } 
+		  
+		  catch (NotBoundException e) 
+		  {
+			  // TODO Auto-generated catch block
+			  e.printStackTrace();
+		  }		  
+		  
+		  if(max>0 && max <101)
+		  {
+	   		  response.setIntHeader("Refresh", 10);
+		      response.setContentType("text/plain");  
+		      response.setCharacterEncoding("UTF-8");
+		      response.getWriter().write(String.valueOf("\nJob Number: " +String.valueOf(jobNumber)));
+		      response.getWriter().write(String.valueOf("\nFinonacci Sequence: " +String.valueOf(fibCall)));
+		  }
 	   
-	   try {
-		result = fib.rmiCall(max);
-	} catch (NotBoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	   		response.setIntHeader("Refresh", 5);
-		    response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
-		    response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
-		    response.getWriter().write(String.valueOf("\nJob Number is: " +String.valueOf(jobNumber)));
-		    response.getWriter().write(String.valueOf("\nResult is: " +String.valueOf(result)));
-		    
-	    //PrintWriter out = response.getWriter();
-	    //out.println ( "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n" + "<html> \n" + "<head> \n" + "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\"> \n" + "<title> My first jsp</title> \n" + "</head> \n" + "<body> \n" + "<font size=\"12px\" color=\"" + max + "\">" + "Hello World" + "</font> \n" + "</body> \n" + "</html>" );
+		  else if(max<1 || max >100)
+		  {
+		      response.setContentType("text/plain");    
+		      response.setCharacterEncoding("UTF-8"); 
+		      response.getWriter().write(String.valueOf(String.valueOf(errorMessage)));		 
+		  }
 	  }  
-	  public void setIntHeader(String header, int headerValue){
+	  public void setIntHeader(String header, int headerValue)
+	  {
 		  
 	  }
 	  
 	  
 	  
-	}
+}

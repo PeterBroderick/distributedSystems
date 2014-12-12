@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 public class FibClient 
 {
 	public String rmiCall(int max) throws RemoteException, MalformedURLException, NotBoundException {
-		//Ask the registry running on 10.2.2.65 and listening in port 1099 for the instannce of
+		//Ask the registry running on 10.2.2.65 and listening in port 1099 for the instance of
 		//the MessageService object that is bound to the RMI registry with the name howdayService.
 		RemoteFibonacci fs = (RemoteFibonacci) Naming.lookup("rmi://localhost:1099/howdayService");
 		

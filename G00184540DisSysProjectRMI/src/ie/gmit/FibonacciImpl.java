@@ -15,18 +15,18 @@ private static final long serialVersionUID = 1L;
 	@Override
 	public String getFibonacciSequence(int max) throws RemoteException {
 		// TODO Auto-generated method stub	
-			String value = "0, ";
+		String value = "0, ";
 		
-			// DO file computation here
-			for(int i = 1; i <= max; i++)
-			{
-				value += (fibonacciLoop(i) + ", ");
-					}
-				return value;
-			}
-		
-		public static int fibonacciLoop(int number)
+		//Print out the fibonacci numbers calculated in the fibonacciLoop method below.
+		for(int i = 1; i <= max; i++)
 		{
+			value += (fibonacciLoop(i) + ", ");
+		}
+		return value;
+	}
+			
+	public static int fibonacciLoop(int number)
+	{
 		    if(number == 1 || number == 2)
 		    {
 		        return 1;
@@ -34,7 +34,7 @@ private static final long serialVersionUID = 1L;
 		    int fib1=1, fib2=1, fibonacci=1;
 		    for(int i= 3; i<= number; i++)
 		    {
-		        fibonacci = fib1 + fib2; //Fibonacci number is sum of previous two Fibonacci number
+		        fibonacci = fib1 + fib2;
 			    fib1 = fib2;
 			    fib2 = fibonacci;
 		    }

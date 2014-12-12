@@ -10,10 +10,10 @@
 	<body>		
 	
 		<center>
-<h2>Auto Refresh Header Example</h2>
+<h2>This Page will refresh every 10 seconds</h2>
 <%
    // Set refresh, autoload time as 5 seconds
-   response.setIntHeader("Refresh", 5);
+   response.setIntHeader("Refresh", 10);
    // Get current time
    Calendar calendar = new GregorianCalendar();
    String am_pm;
@@ -25,18 +25,14 @@
    else
       am_pm = "PM";
    String CT = hour+":"+ minute +":"+ second +" "+ am_pm;
-   out.println("Crrent Time: " + CT + "\n");
-   
-   
-   
+   out.println("Current Time: " + CT + "\n");  
 %>
-
 	
 </center>
 
 		<form action="FibServlet">			
-			 Please enter a Fibolizable number in the range [1-100] <br>
-			<input type="text" name="max"size="20px">
+			 Please enter a number in the range [1-100] <br>
+			<input type="text" name="max"size="200px">
 			<input type="submit" value="submit">						
 		</form>		
 	</body>	

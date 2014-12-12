@@ -7,12 +7,10 @@ import java.util.Map;
 public class FibService {
 	
 	private static LinkedList<FibRequest> inqueue = new LinkedList<FibRequest>();
-	//private int number;
 	private Map<Integer, String> outqueue = new HashMap<Integer, String>();
 	
 	public static int add(int max){
-		//Generate a random number
-		//math.random
+		
 		int number = (int)(Math.random()*(900 -1) +1);
 		
 		//Object random;
@@ -22,9 +20,9 @@ public class FibService {
 	
 	public String getResult(int jobNumber){
 		if(outqueue.containsKey(jobNumber)){
-			String result = outqueue.get(jobNumber);
+			String fibCall = outqueue.get(jobNumber);
 			outqueue.remove(jobNumber);
-			return result;
+			return fibCall;
 			
 		}
 		else{
